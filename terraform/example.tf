@@ -54,14 +54,20 @@ output "ami_id" {
   value = "${data.aws_ami.packer_image.id}"
 }
 
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6IvcUJcbgqKP5++aHue4ymF2BYmAC/JGUMvrGE9qdQanaP+O4vtPp/qBlsK1kU7bwgzYk/DSLANRfC4uflwhZnirjHSrFZLn76UrHpJoO24MfHZbnWzdkm2rfxki/dYZ13WHag7MSqXlUM4O/A1FLDhwXiwL9KWCAnB79qIYzSYR/0PtBNo4nEN4Bfw7xOhWlMiwR2eaaCxC+q0zKqvhQlxQAfo2PS8kSJ7UsgAKahMIvzQKWM2mG183Yvs1fzGDbnaTagRx89H7ZIH/DDpzrhoQSp3U2Wz7rQZfj5I38XCiMAmOIwifQeOVWnafyYnltmogLWLIEminJg7DF9KGf drudakov@Administrators-MacBook-Pro.local"
+  }
+
 resource "aws_instance" "ec2_instance" {
   ami           = "${data.aws_ami.packer_image.id}"
   instance_type = "${var.instance_type}"
-
  provisioner "local-exec" {
   command = "echo ${aws_instance.ec2_instance.public_ip} > ip_address.txt"
 	}
 }
+
+
 
 # resource "aws_eip" "eip" {
 #   instance = "${aws_instance.ec2_instance.id}"
@@ -88,9 +94,9 @@ resource "aws_s3_bucket" "b" {
     enabled = true
   }
 
-  provisioner "local-exec" {
-     command = "aws s3 cp ./index.html ${aws_s3_bucket.b}"
-  }
+  # provisioner "local-exec" {
+  #    command = "aws s3 cp ./index.html ${aws_s3_bucket.b}"
+  # }
 }
 
 resource "aws_s3_bucket_policy" "b" {

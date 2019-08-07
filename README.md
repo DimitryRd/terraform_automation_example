@@ -16,14 +16,11 @@ Nginx, serving helloWorld index.html originally stored in S3 bucket.
 - <s>IAM user</s>
 
 ### ДОДАТКОВІ ВИМОГИ:
-- index.html should survive shutdown/startup cycle
+- <s>index.html should survive shutdown/startup cycle</s>
 - Nginx can be either pre-installed or setup during startup
 - <s>Solution should be consistent and reproducible (no manual steps)</s>
 
 ### Тобі залишається написати свій солюшн, щоб досягти цілі :)
-
-
-
 
 ### Packer command
 ```
@@ -50,4 +47,4 @@ https://www.terraform.io/docs/providers/aws/
 2. INTRODUCTION TO TERRAFORM WITH AWS ELB & NGINX
 https://www.bogotobogo.com/DevOps/Terraform/Terraform-Introduction-AWS-elb-nginx.php
 
-3.
+3.https://davidburgos.blog/nginx-to-serve-statics-from-amazon-s3/
