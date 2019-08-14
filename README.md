@@ -37,7 +37,10 @@ terraform plan
 terraform apply
 ```
 
-
+Location of index.html on EC2 instance
+```
+/usr/share/nginx/html/index.html
+```
 
 ### Useful links
 
@@ -47,4 +50,6 @@ https://www.terraform.io/docs/providers/aws/
 2. INTRODUCTION TO TERRAFORM WITH AWS ELB & NGINX
 https://www.bogotobogo.com/DevOps/Terraform/Terraform-Introduction-AWS-elb-nginx.php
 
-3.https://davidburgos.blog/nginx-to-serve-statics-from-amazon-s3/
+3. https://davidburgos.blog/nginx-to-serve-statics-from-amazon-s3/
+
+4. https://medium.com/@hmalgewatta/setting-up-an-aws-ec2-instance-with-ssh-access-using-terraform-c336c812322f
