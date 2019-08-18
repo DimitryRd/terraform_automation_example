@@ -33,6 +33,8 @@ packer build -only docker nginx_ami.json 2>&1 | tee packer.log
 ### Terraform command
 ```
 cd terraform
+export TF_LOG=INFO
+export TF_LOG_PATH="./logs"
 terraform plan
 terraform apply
 ```
