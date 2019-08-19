@@ -21,23 +21,21 @@ resource "aws_instance" "ec2_instance" {
   ami = "${data.aws_ami.packer_image.id}"
   instance_type = "${var.instance_type}"
   key_name = "deployment-key"
+  # associate_public_ip_address = true
   security_groups = ["${aws_security_group.ingress-all-test.id}"]
   subnet_id = "${aws_subnet.subnet-uno.id}"
 
   tags = {
     Name = "Terraform_${timestamp()}"
   }
-  # provisioner "local-exec" {
-  #   command = "echo ${aws_instance.ec2_instance.public_ip} > ip_address.txt"
-  # }
 }
 
 
 resource "null_resource" "file_upload" {
-  provisioner "file" {
-    source      = "./index.html"
-    # destination = "/usr/share/nginx/html/index.html"
-    destination = "/home/ubuntu/index.html"
+  triggers = {
+    public_ip = "${aws_eip.ip-test-env.public_ip}"
+  }
+
   connection {
     # The default username for our AMI
     type = "ssh"
@@ -45,32 +43,29 @@ resource "null_resource" "file_upload" {
     host = "${aws_eip.ip-test-env.public_ip}"
     user = "ubuntu"
     private_key = "${file("~/.ssh/deployment-key")}"
-    }
+    agent = true
+  }
+
+  provisioner "file" {
+    source      = "./index.html"
+    destination = "/home/ubuntu/index.html"
+  }
+  provisioner "file" {
+    source      = "./nginx.conf"
+    destination = "/home/ubuntu/nginx.conf"
+  }
+
+  provisioner "remote-exec" {
+   inline = [
+    # "sudo apt-get -y update",
+    # "sudo ufw allow 'Nginx HTTP'",
+    "sudo rm /usr/share/nginx/html/index.html /etc/nginx/nginx.conf",
+    "sudo cp /home/ubuntu/index.html /usr/share/nginx/html/index.html",
+    "sudo cp /home/ubuntu/nginx.conf /etc/nginx/nginx.conf",
+    "sudo service nginx restart"
+   ]
   }
 }
-
-# resource "null_resource" "file_upload" {
-#   provisioner "remote-exec" {
-
-#   connection {
-#     # The default username for our AMI
-#     type = "ssh"
-#     # host = "${aws_instance.ec2_instance.public_ip}"
-#     host = "${aws_eip.ip-test-env.public_ip}"
-#     user = "ubuntu"
-#     private_key = "${file("~/.ssh/deployment-key")}"
-#     # The connection will use the local SSH agent for authentication.
-#     }
-
-#       inline = [
-#     "cp /home/ubuntu/index.html /usr/share/nginx/html/index.html",
-#     "sudo apt-get -y install nginx",
-#     "sudo service nginx start",
-#   ]
-# }
-# }
-
-
 output "eip" {
   value = "${aws_eip.ip-test-env}"
 }

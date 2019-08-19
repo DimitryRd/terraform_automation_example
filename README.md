@@ -55,3 +55,7 @@ https://www.bogotobogo.com/DevOps/Terraform/Terraform-Introduction-AWS-elb-nginx
 3. https://davidburgos.blog/nginx-to-serve-statics-from-amazon-s3/
 
 4. https://medium.com/@hmalgewatta/setting-up-an-aws-ec2-instance-with-ssh-access-using-terraform-c336c812322f
+
+5. https://github.com/gruntwork-io/terratest/tree/master/examples/terraform-remote-exec-example
+
+6. https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-virtual-hosts-server-blocks-on-ubuntu-12-04-lts--3
