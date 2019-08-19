@@ -57,8 +57,6 @@ resource "null_resource" "file_upload" {
 
   provisioner "remote-exec" {
    inline = [
-    # "sudo apt-get -y update",
-    # "sudo ufw allow 'Nginx HTTP'",
     "sudo rm /usr/share/nginx/html/index.html /etc/nginx/nginx.conf",
     "sudo cp /home/ubuntu/index.html /usr/share/nginx/html/index.html",
     "sudo cp /home/ubuntu/nginx.conf /etc/nginx/nginx.conf",
