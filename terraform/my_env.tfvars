@@ -1,6 +1,0 @@
-instance_type   = "t2.micro"
-region          = "us-east-1"
-profile         = "rudakov"
-user_name       = "rudakov"
-public_key_path = "/Users/drudakov/.ssh/deployment-key.pub"
-public_key      = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCs9Q9zCStaTOnqQdq7v2wH8B0mnSyC+PbY/aXECstZKXUcq0RKeg2HHLjvBez2W48xMcRmlr8Aq+dUweP6tnAhSskke6PRfd+2hjcjDuNwEgC74ghgAY/vsYcmDVdhyDlYoUjAwim1yxTnKUXkF7FbeWv9BY/wubEa7f8xT6zmhcxzUBJ9eVH4yCm+GwvZx4z9rcoDJDH5IphUf4qiHBgQ821JtWO5atULaoSV/ftdg1EstvgiF3NLDc/DPubl6JW5Z05d3BxnrAXV1xEnSFJemJKSQmeQmGXznp6VDPQ/PySUzEdsjA4h3288BS/Oef6X71DM/uoxqy9P6VgrkmoR drudakov@Administrators-MacBook-Pro.local"

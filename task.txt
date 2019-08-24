@@ -1,0 +1,3 @@
+https://github.com/DimitryRd/terraform_automation_example
+
+git@github.com:DimitryRd/terraform_automation_example.git

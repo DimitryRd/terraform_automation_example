@@ -24,6 +24,20 @@ resource "aws_security_group" "ingress-all-test" {
     to_port = 22
     protocol = "tcp"
   }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   // Terraform removes the default rule
   egress {
     from_port = 0
@@ -44,9 +58,10 @@ resource "aws_internet_gateway" "test-env-gw" {
     Name = "test-env-gw"
   }
 }
-
 resource "aws_route_table" "route-table-test-env" {
+
   vpc_id = "${aws_vpc.test-env.id}"
+
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.test-env-gw.id}"
