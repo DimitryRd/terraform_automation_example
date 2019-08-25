@@ -1,7 +1,6 @@
 provider "aws" {
+  profile = "${var.profile}"
   region  = "${var.region}"
-  access_key = "${var.aws_access_key_id}"
-  secret_key = "${var.aws_secret_access_key}"
 }
 
 resource "tls_private_key" "example" {
@@ -67,24 +66,24 @@ resource "null_resource" "file_upload" {
   }
 }
 
-# resource "aws_s3_bucket" "b" {
-#   bucket = "my-bucket"
-#   acl = "private"
-#   force_destroy = true
-#   tags = {
-#     Name = "Nginx bucket"
-#     Environment = "Dev"
-#   }
-#   versioning {
-#     enabled = false
-#   }
-#   # provisioner "local-exec" {
-#   #    command = "aws s3 cp index.html s3://${aws_s3_bucket.b}"
-#   # }
-# }
+resource "aws_s3_bucket" "bucket" {
+  bucket = "nginx-source-bucket"
+  acl = "private"
+  force_destroy = true
+  tags = {
+    Name = "Nginx bucket"
+    Environment = "Dev"
+  }
+  versioning {
+    enabled = false
+  }
+  # provisioner "local-exec" {
+  #    command = "aws s3 cp index.html s3://${aws_s3_bucket.b}"
+  # }
+}
 
-# resource "aws_s3_bucket_object" "file_upload" {
-#   bucket = "${aws_s3_bucket.b.id}"
-#   key    = "index.html"
-#   source = "index.html"
-# }
+resource "aws_s3_bucket_object" "file_upload" {
+  bucket = "${aws_s3_bucket.bucket.id}"
+  key    = "index.html"
+  source = "index.html"
+}
