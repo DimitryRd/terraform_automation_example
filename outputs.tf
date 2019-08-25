@@ -1,9 +1,5 @@
-output "eip" {
-  value = "${aws_eip.ip-test-env}"
-}
-
-output "ip" {
-  value = "${aws_instance.ec2_instance.public_ip}"
+output "public_dns" {
+  value = "${aws_eip.ip-test-env.public_dns}"
 }
 
 # output "vpc" {
@@ -13,9 +9,11 @@ output "ip" {
 # output "subnet" {
 #   value = "${aws_subnet.subnet-uno}"
 # }
+
 # output "sec_group" {
 #   value = "${aws_security_group.ingress-all-test}"
 # }
+
 # output "my_bucket" {
 #   value = "${aws_s3_bucket.b}"
 # }
@@ -31,6 +29,7 @@ output "ip" {
 # output "aws_key_pair" {
 #   value = "${aws_key_pair.generated_key}"
 # }
+
 # output "tls_private_key" {
 #   value = "${tls_private_key.example}"
 # }

@@ -5,54 +5,38 @@ Nginx, serving helloWorld index.html originally stored in S3 bucket.
 ### (не абсолютно всі вони, тож обирай, що найбільше підійде саме тобі):
 - AWS Auto Scaling Group
 - AWS Lambda function
-- <s>AWS S3 bucket</s>
-- <s>AWS S3 bucket policy</s>
-- <s>Amazon AMI image</s>
+- AWS S3 bucket
+- AWS S3 bucket policy
+- Amazon AMI image
 - EBS volume
-- <s>EC2 KeyPair</s>
-- <s>EC2 instance</s>
-- <s>IAM policy</s>
-- <s>IAM role</s>
-- <s>IAM user</s>
+- EC2 KeyPair
+- EC2 instance
+- IAM policy
+- IAM role
+- IAM user
 
 ### ДОДАТКОВІ ВИМОГИ:
-- <s>index.html should survive shutdown/startup cycle</s>
-- <s>Nginx can be either pre-installed or setup during startup</s>
-- <s>Solution should be consistent and reproducible (no manual steps)</s>
+- index.html should survive shutdown/startup cycle
+- Nginx can be either pre-installed or setup during startup
+- Solution should be consistent and reproducible (no manual steps)
 
 ### Тобі залишається написати свій солюшн, щоб досягти цілі :)
 
-### Packer command
-```
-brew install packer (For macOS)
-cd packer
-packer validate nginx_ami.json
-packer build -only amazon-ebs nginx_ami.json
-packer build -only docker nginx_ami.json 2>&1 | tee packer.log
-```
+
 ### Terraform command
 ```
-cd terraform
 terraform init
-export TF_LOG=INFO
-export TF_LOG_PATH="./logs"
-terraform plan
+terraform apply -> Then please enter your AWS profile name which is located in $HOME/.aws/credentials
 ```
 
-You cant setup variables in my_env.tfvars file...
+#### In the end please do
 ```
-terraform apply  -var-file=my_env.tfvars
-```
-
-Or you can set it during the net Terraform run
-```
-terraform apply
+terraform destroy --auto-approve
 ```
 
 # Expected result
 
 ![Expected result](Result.png)
-
 
 ### Useful links
 
@@ -69,3 +53,7 @@ https://www.bogotobogo.com/DevOps/Terraform/Terraform-Introduction-AWS-elb-nginx
 5. https://github.com/gruntwork-io/terratest/tree/master/examples/terraform-remote-exec-example
 
 6. https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-virtual-hosts-server-blocks-on-ubuntu-12-04-lts--3
+
+7. https://medium.com/tensult/aws-how-to-mount-s3-bucket-using-iam-role-on-ec2-linux-instance-ad2afd4513ef
+
+8. https://labs.tadigital.com/index.php/2018/06/15/how-to-mount-s3-bucket-on-linux-aws-ec2-instance/
