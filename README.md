@@ -20,13 +20,11 @@ Nginx, serving helloWorld index.html originally stored in S3 bucket.
 - Nginx can be either pre-installed or setup during startup
 - Solution should be consistent and reproducible (no manual steps)
 
-### Тобі залишається написати свій солюшн, щоб досягти цілі :)
-
 
 ### Terraform command
 ```
 terraform init
-terraform apply -> Then please enter your AWS profile name which is located in $HOME/.aws/credentials
+terraform apply -> Then kindly input your AWS credentials: access key and secret key
 ```
 
 #### In the end please do

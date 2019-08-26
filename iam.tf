@@ -1,3 +1,4 @@
+// Saved for the next development
 # data "aws_iam_user" "my_user" {
 #   user_name = "${var.user_name}"
 # }

@@ -1,13 +1,5 @@
-
-variable "profile" {
-  default = "personal"
-}
-variable "id" {
-  default = "AKIAJV6IQ66XOHQU6AJQ"
-}
-variable "pass" {
-  default = "dSsocmGVDEziFdm4raC6tuQpdYyxO4zpbxsno2z0"
-}
+variable "access_key" {}
+variable "secret_key" {}
 variable "instance_type" {
   default = "t2.micro"
 }
@@ -20,6 +12,3 @@ variable "key_name" {
 variable "region" {
   default = "us-east-1"
 }
-
-
-

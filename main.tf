@@ -1,7 +1,8 @@
 provider "aws" {
-  profile                 = "${var.profile}"
-  region                  = "${var.region}"
-  shared_credentials_file = "~/.aws/credentials"
+  access_key = "${var.access_key}"
+  secret_key = "${var.secret_key}"
+  # profile = "${var.profile}"
+  region  = "${var.region}"
 }
 
 resource "tls_private_key" "example" {
@@ -54,10 +55,9 @@ resource "null_resource" "file_upload" {
       "sudo make install",
       "cd /tmp",
       "touch passwd-s3fs",
-      "echo '${var.id}:${var.pass}' > passwd-s3fs",
+      "echo '${var.access_key}:${var.secret_key}' > passwd-s3fs",
       "chmod 640 passwd-s3fs",
       "sudo cp passwd-s3fs /etc",
-      "sudo mkdir /nginx_static",
       "sudo s3fs nginx-source-bucket -o use_cache=/tmp -o allow_other -omultireq_max=5 -o nonempty -o uid=$(id -u www-data) /usr/share/nginx/html",
       "sudo service nginx restart"
     ]
