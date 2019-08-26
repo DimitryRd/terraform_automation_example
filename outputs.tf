@@ -1,5 +1,5 @@
-output "public_dns" {
-  value = "${aws_eip.ip-test-env.public_dns}"
+output "public_ip" {
+  value = "${aws_eip.ip-test-env.public_ip}"
 }
 
 # output "vpc" {

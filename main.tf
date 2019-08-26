@@ -42,24 +42,24 @@ resource "null_resource" "file_upload" {
     private_key = "${tls_private_key.example.private_key_pem}"
     agent       = true
   }
-  provisioner "file" {
-    source      = "./index.html"
-    destination = "/home/ubuntu/index.html"
-  }
-
   provisioner "remote-exec" {
     inline = [
-      "sleep 60",
       "sudo apt-get -y update",
-      "sudo apt-get -y install nginx",
-      "sudo service nginx start",
-      "sudo rm /usr/share/nginx/html/index.html",
-      "sudo cp /home/ubuntu/index.html /usr/share/nginx/html/index.html",
-      # "sudo cp /home/ubuntu/nginx.conf /etc/nginx/nginx.conf",
-      # "export PATHTONGINX=$(nginx -t)",
-      # "cat /etc/nginx/nginx.conf",
-      # "ls /etc/nginx/sites-enabled/",
-      # "cat /etc/nginx/sites-enabled/default"
+      "sudo wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/s3fs/s3fs-1.74.tar.gz",
+      "sudo apt-get -y install nginx build-essential gcc libfuse-dev libcurl4-openssl-dev libxml2-dev mime-support pkg-config libxml++2.6-dev libssl-dev",
+      "sudo tar -xvzf s3fs-1.74.tar.gz",
+      "cd s3fs-1.74",
+      "sudo ./configure -prefix=/usr",
+      "sudo make",
+      "sudo make install",
+      "cd /tmp",
+      "touch passwd-s3fs",
+      "echo '${var.id}:${var.pass}' > passwd-s3fs",
+      "chmod 640 passwd-s3fs",
+      "sudo cp passwd-s3fs /etc",
+      "sudo mkdir /nginx_static",
+      "sudo s3fs nginx-source-bucket -o use_cache=/tmp -o allow_other -omultireq_max=5 -o nonempty -o uid=$(id -u www-data) /usr/share/nginx/html",
+      "sudo service nginx restart"
     ]
   }
 }

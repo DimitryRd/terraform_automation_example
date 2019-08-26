@@ -57,3 +57,5 @@ https://www.bogotobogo.com/DevOps/Terraform/Terraform-Introduction-AWS-elb-nginx
 7. https://medium.com/tensult/aws-how-to-mount-s3-bucket-using-iam-role-on-ec2-linux-instance-ad2afd4513ef
 
 8. https://labs.tadigital.com/index.php/2018/06/15/how-to-mount-s3-bucket-on-linux-aws-ec2-instance/
+
+```
