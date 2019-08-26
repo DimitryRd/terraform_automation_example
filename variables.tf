@@ -2,6 +2,12 @@
 variable "profile" {
   default = "personal"
 }
+variable "id" {
+  default = "AKIAJV6IQ66XOHQU6AJQ"
+}
+variable "pass" {
+  default = "dSsocmGVDEziFdm4raC6tuQpdYyxO4zpbxsno2z0"
+}
 variable "instance_type" {
   default = "t2.micro"
 }
